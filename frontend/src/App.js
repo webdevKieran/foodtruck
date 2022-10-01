@@ -1,11 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Map from './components/Map';
+import LoadMap from './components/LoadMap';
 import Navbar from './components/Navbar';
 import Home from './views/Home'
 import './App.css';
 
+
 function App() {
+
+
   return (
     <div className="App">
       <Router>
@@ -14,7 +17,7 @@ function App() {
           routes go here
         </Routes>
       </Router>
-      <Map />
+      <LoadMap />
       <Home />
     </div>
   );
