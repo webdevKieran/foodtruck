@@ -3,7 +3,8 @@ function Navbar () {
 <div className="Navbar">
   Navbar goes here
   <ul><li>Home</li>
-  <li>Signin</li>
+  <li>Login</li>
+  <li>Signup</li>
     </ul>
 </div>
   )

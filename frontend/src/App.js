@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoadMap from './components/LoadMap';
 import Navbar from './components/Navbar';
 import Home from './views/Home'
+import GeoLocation from './views/GeoLocation';
 import './App.css';
 
 
@@ -18,6 +19,7 @@ function App() {
         </Routes>
       </Router>
       <LoadMap />
+      <GeoLocation />
       <Home />
     </div>
   );

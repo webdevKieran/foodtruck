@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { GoogleMap, Marker } from '@react-google-maps/api';
+import { GoogleMap, MarkerF } from '@react-google-maps/api';
 
 
 // this is going to load the Google map from the Google Maps Platform
@@ -11,16 +11,23 @@ import { GoogleMap, Marker } from '@react-google-maps/api';
 
 
 function Map() {
+
+  
 // load the defalut map position which won't be re-rendered with the map each time because no dependencies:
 const centreMap = useMemo(() => ({ lat: 52, lng: -8 }), []);
+const mapOptions = useMemo(() => ({
+  disableDefaultUI: true,
+  mapId: "4408b1486b24d7f3" 
+}),[])
 
   return <GoogleMap 
     zoom={8} 
-    center={ centreMap } 
+    center={ centreMap }
+    options={ mapOptions} 
     mapContainerClassName="map-container" 
     >
 
-  <Marker position={{ lat: 52, lng: -8,}} icon={"https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"}></Marker>
+  <MarkerF position={{ lat: 52, lng: -8,}} ></MarkerF>
     </GoogleMap>
 }
 
