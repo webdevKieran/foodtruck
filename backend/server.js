@@ -6,7 +6,7 @@
 const dotenv = require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
-
+const userRoutes = require('./routes/user')
 
 // mongoose library used to simplify interacting with MongoDB
 
@@ -29,11 +29,23 @@ app.get('/', (req, res) => {
   res.json({mssg: 'Helo world'})
 })
 
+app.use('/api/user', userRoutes)
+
+// connect to db
+// whenever using an async function, use promise and catch errors
+mongoose.connect(process.env.MONGO_URI)
+  .then(()=>{
+    // listen on port in dot env
+
 // request listener
 app.listen(process.env.PORT, () =>{
   console.log('Listening on port ',process.env.PORT)
 })
 
+})
+.catch((error) => {
+  console.log(error)
+})
 
 
 
