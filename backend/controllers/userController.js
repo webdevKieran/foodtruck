@@ -71,7 +71,78 @@ const getUser = async(req,res) => {
   res.status(200).json(user)
 }
 
+// create aditional fields in the user document
+
+
+const createDetails = async (req, res) => {
+  const {businessName, contactNumber, descrip, posLat, posLng} = req.body
+
+  let emptyFields = []
+  if(!businessName) {
+    emptyFields.push('businessName')
+  }
+  if(!contactNumber) {
+    emptyFields.push('contactNumber')
+  }
+  if(!descrip) {
+    emptyFields.push('descrip')
+  }
+  if(!posLat) {
+    emptyFields.push('posLat')
+  }
+  if(!posLng) {
+    emptyFields.push('posLng')
+  }
+  if(emptyFields.length >0) {
+    return res.status(400).json({error: 'Please fill in all fields', emptyFields })
+  }
+
+  // add doc to db
+  try{
+    const user = await User.create({businessName, contactNumber, descrip, posLat, posLng})
+    res.status(200).json(user)
+  } catch (error){
+    res.status(400).json({error: error.message})
+  }
+}
+
+// delete the user doc details
+
+const deleteDetails = async (req, res) => {
+  const { id } = req.params
+  
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such user'})
+  }
+  const user = await User.findOneAndDelete({_id: id})
+  
+  if (!user) {
+    return res.status(400).json({error: 'No such user'})
+  }
+  res.status(200).json(user)
+
+}
+
+// update a User
+
+const updateDetails = async (req, res) => {
+  const { id } = req.params
+  
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such user'})
+  }
+  const user = await user.findOneAndUpdate({_id: id}, {
+    ...req.body
+  } )
+  
+  if (!user) {
+    return res.status(400).json({error: 'No such user'})
+  }
+  res.status(200).json(user)
+}
 
 
 
-module.exports = { signupUser, loginUser, getUser, getUsers}
+
+
+module.exports = { signupUser, loginUser, getUser, getUsers, createDetails, updateDetails, deleteDetails}
