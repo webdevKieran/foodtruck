@@ -31,9 +31,11 @@ router.get('/:id', getUser)
 router.delete('/:id', deleteDetails)
 
 // UPDATE user details
-router.patch('/:id', updateDetails)
+ router.patch('/:id', updateDetails)
 
 // CREATE user details
-router.patch('/:id', createDetails)
+// *this doesn't make sense since we have ID already. Commented out for now*
+//
+//router.patch('/:id', createDetails)
 
 module.exports = router

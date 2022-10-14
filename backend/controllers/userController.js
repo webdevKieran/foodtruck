@@ -93,18 +93,30 @@ const createDetails = async (req, res) => {
   if(!posLng) {
     emptyFields.push('posLng')
   }
-  if(emptyFields.length >0) {
-    return res.status(400).json({error: 'Please fill in all fields', emptyFields })
-  }
 
-  // add doc to db
-  try{
-    const user = await User.create({businessName, contactNumber, descrip, posLat, posLng})
-    res.status(200).json(user)
-  } catch (error){
-    res.status(400).json({error: error.message})
-  }
+  // section below asks for all details but that isn;t necessary just yet KF 14-10-2022
+
+
+//  if(emptyFields.length >0) {
+//    return res.status(400).json({error: 'Please fill in all fields', emptyFields })
+//  }
+
 }
+
+// add doc to db -> this operation doesn;t make sense. 
+// When a user signs up the ID is created. We are just adding new fields, not creating a doc
+// so the Update should be sufficient using updateDetails below.
+//
+// I will leave this in the comments anyway for posterity
+
+//
+//  try{
+//   const user = await User.create({businessName, contactNumber, descrip, posLat, posLng})
+//    res.status(200).json(user)
+//  } catch (error){
+//    res.status(400).json({error: error.message})
+//  }
+// }
 
 // delete the user doc details
 
@@ -131,7 +143,7 @@ const updateDetails = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({error: 'No such user'})
   }
-  const user = await user.findOneAndUpdate({_id: id}, {
+  const user = await User.findOneAndUpdate({_id: id}, {
     ...req.body
   } )
   
@@ -145,4 +157,4 @@ const updateDetails = async (req, res) => {
 
 
 
-module.exports = { signupUser, loginUser, getUser, getUsers, createDetails, updateDetails, deleteDetails}
+module.exports = { signupUser, loginUser, getUser, getUsers, updateDetails, deleteDetails }
