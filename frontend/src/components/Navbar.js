@@ -1,12 +1,24 @@
-function Navbar () {
-  return (
-<div className="Navbar">
-  Navbar goes here
-  <ul><li>Home</li>
-  <li>Login</li>
-  <li>Signup</li>
-    </ul>
-</div>
+import { Link } from 'react-router-dom'
+
+const Navbar = () => {
+
+  
+return (
+<header>
+  <div className="container">
+    <Link to='/'>
+      <h3>Foodtruck Finder</h3>
+    </Link>
+    <nav>
+      <div>
+        <Link to='/Login'>Log In</Link>
+      </div>
+      <div>
+        <Link to='/Signup'>Sign Up</Link>
+      </div>
+    </nav>
+  </div>
+</header>
   )
 }
 

@@ -1,26 +1,37 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoadMap from './components/LoadMap';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './views/Home'
-import GeoLocation from './views/GeoLocation';
+import Login from "./views/Login";
+import Signup from "./views/Signup";
 import './App.css';
 
 
 function App() {
 
-
   return (
     <div className="App">
-      <Router>
+      <BrowserRouter>
         <Navbar />
-        <Routes>
-          routes go here
-        </Routes>
-      </Router>
-      <LoadMap />
-      <GeoLocation />
-      <Home />
+        <div className="">
+          <Routes>
+          <Route
+              path="/"
+              element={<Home />}
+            />
+            <Route
+              path="/Login"
+              element={<Login />}
+            />
+            <Route
+              path="/Signup"
+              element={<Signup />}
+            />
+          </Routes>
+       </div>
+      </BrowserRouter>
+
+      
     </div>
   );
 }

@@ -8,9 +8,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const userRoutes = require('./routes/user')
 
-// mongoose library used to simplify interacting with MongoDB
 
-// const userRoutes = require('./routes/user')
 
 // express backend application
 const app = express()
@@ -31,7 +29,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/user', userRoutes)
 
-// connect to db
+// mongoose library used to simplify interacting with MongoDB
 // whenever using an async function, use promise and catch errors
 mongoose.connect(process.env.MONGO_URI)
   .then(()=>{
