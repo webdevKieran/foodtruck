@@ -2,11 +2,14 @@
 import { useState } from 'react'
 import DetailsForm from '../components/DetailsForm'
 import { useLogin } from '../hooks/useLogin'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] =  useState('')
   const { login, error, isLoading } = useLogin()
+
+  const { user } = useAuthContext()
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
@@ -14,9 +17,21 @@ const Login = () => {
     await login(email, password)
   }
 
+   /* this section should hide the details until state changed to user logged in
+      I am doing this by loading the component if a user is present*/
+
   return (
     <div>
-      <form className='login' onSubmit={handleSubmit} hidden={login}>
+    {user && (
+       <div><h2>Welcome {user.email}</h2>
+       <DetailsForm />
+       </div>
+     )
+    }
+    
+      {!user && (
+    <div className='container'>
+      <form className='login' onSubmit={handleSubmit}>
         <h3>Log in</h3>
         <label>Email:</label>
         <input
@@ -30,16 +45,13 @@ const Login = () => {
           value={password}
         />
         <button disabled={isLoading} >Log in</button>
-        {error&&<div className="error">{error}</div>}
+        {error && <div className="error">{error}</div>}
       </form>
-      <br />
-      {/* this section should hide the details until state changed to user logged in
-      I think the best way is to create a handler for the div with a value hidden if handler is true*/}
-      <div className='container'>
-      <DetailsForm />
-      </div>
+    </div>
+    )}
     </div>
   )
+
 }
 
   export default Login

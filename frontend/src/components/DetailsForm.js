@@ -44,7 +44,7 @@ const DetailsForm = () => {
     setError(null)
     setEmptyFields([])
     console.log('new workout added', json)
-    dispatch({type: 'CREATE_WORKOUT', payload: json})
+    dispatch({type: 'CREATE_DETAILS', payload: json})
   }
   }
 

@@ -1,16 +1,16 @@
 import { useState } from 'react'
-import { useAuthContext } from './useAuthContext'
+import { useDetailsContext } from './useDetailsContext'
 
 export const useLogin = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
-    const { dispatch } = useAuthContext()
+    const { dispatch } = useDetailsContext()
   
     const login = async(email, password) => {
       setIsLoading(true)
       setError(null)
   // send creds to the database
-      const response = await fetch('/api/user/login', {
+      const response = await fetch('/api/user/updateDetails', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({email, password})
