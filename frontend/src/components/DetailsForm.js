@@ -49,7 +49,7 @@ const DetailsForm = () => {
   }
 
   return(
-    <div>
+    <div className='container'>
     <GeoLocation />
     <form className="detailsForm" onSubmit={handleSubmit}>
       <h3>Update your business details</h3>

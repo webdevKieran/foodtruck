@@ -88,5 +88,5 @@ userSchema.statics.login = async function (email, password) {
 }
 
 
-module.exports - mongoose.model('Details',detailSchema)
+module.exports = mongoose.model('Details',detailSchema)
 module.exports = mongoose.model('User', userSchema)

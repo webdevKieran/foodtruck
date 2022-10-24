@@ -49,7 +49,7 @@ const signupUser = async (req, res) => {
 // to populate the appropriate infobox on the map marker
 
 const getUsers = async (req, res) => {
-  const users = await User.find({})
+  const users = await User.find({}).select('details')
 
   res.status(200).json(users)
 }
