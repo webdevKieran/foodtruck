@@ -15,20 +15,26 @@ const Login = () => {
   }
 
   return (
-    <div>
-      <form className='login' onSubmit={handleSubmit} hidden={login}>
+    <div className='container'>
+       <form className='login' onSubmit={handleSubmit} hidden={login}>
         <h3>Log in</h3>
-        <label>Email:</label>
+        <div className='row mb-2'>
+        <label className='form-label'>Email:</label>
         <input
           type="email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
         />
+        </div>
+        <div className='row mb-'>
+          <label className='form-label'>Password:</label>
         <input
           type="password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
+          className='form-control'
         />
+        </div>
         <button disabled={isLoading} >Log in</button>
         {error&&<div className="error">{error}</div>}
       </form>

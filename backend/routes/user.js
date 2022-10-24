@@ -10,7 +10,13 @@ const {
   updateDetails
  } = require('../controllers/userController')
 
+ const { getDetails } = require('../controllers/detailsController')
+
 const router = express.Router()
+
+
+//get all the details for all the fodtrucks
+router.get('/foodtrucks', getDetails)
 
 // login route
 router.post('/login', loginUser)

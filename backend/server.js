@@ -7,6 +7,7 @@ const dotenv = require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const userRoutes = require('./routes/user')
+const { foodtruckRouter } = require('./routes/user')
 
 
 
@@ -26,6 +27,8 @@ app.use((req, res, next) =>{
 app.get('/', (req, res) => {
   res.json({mssg: 'Helo world'})
 })
+
+app.use('/api/foodtrucks', userRoutes)
 
 app.use('/api/user', userRoutes)
 

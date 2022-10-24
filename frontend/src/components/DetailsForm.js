@@ -54,39 +54,43 @@ const DetailsForm = () => {
     <form className="detailsForm" onSubmit={handleSubmit}>
       <h3>Update your business details</h3>
 
-      <label>Business Name:</label>
+      <label className='form-label'>Business Name:</label>
       <input
         type="text"
         onChange={(e) => setBusinessName(e.target.value)}
         value={businessName}
-        className={emptyFields.includes('businessName') ? 'error':''}
+        className={emptyFields.includes('businessName') ? 'error':'form-control'}
         /><p />
 
-      <label>Contact Telephone Number:</label>
+      <label className='form-label'>Contact Telephone Number:</label>
       <input
         type="number"
         onChange={(e) => setContactNumber(e.target.value)}
         value={contactNumber}
-        className={emptyFields.includes('contactNumber') ? 'error':''}
+        className={emptyFields.includes('contactNumber') ? 'error':'form-control'}
         /><p />
 
-      <label>Description:</label>
+      <label className='form-label'>Description:</label>
       <textarea
         type="text"
         onChange={(e) => setDescrip(e.target.value)}
         value={descrip}
-        className={emptyFields.includes('descrip') ? 'error':''}
+        id='exampleFormControlTextarea1'
+        rows='3'
+        className={emptyFields.includes('descrip') ? 'error':'form-control'}
         />
         
         <input type="text"
         onChange={(e) => setPosLat(e.target.value)}
         value={GeoLocation.lat}
-        className={emptyFields.includes('posLat') ? 'error':''}
+        className={emptyFields.includes('posLat') ? 'error':'form-control'}
+        hidden="true"
         />
         <input type="text"
         onChange={(e) => setPosLng(e.target.value)}
         value={GeoLocation.lng}
-        className={emptyFields.includes('posLng') ? 'error':''}
+        className={emptyFields.includes('posLng') ? 'error':'form-control'}
+        hidden="true"
         /><p />
 
         <button>Update Your Business Details</button>

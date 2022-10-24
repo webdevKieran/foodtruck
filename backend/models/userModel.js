@@ -4,6 +4,24 @@ const validator = require('validator')
 
 const Schema = mongoose.Schema
 
+const detailSchema = new Schema({
+  businessName: {
+    type: String
+  },
+  contactNumber: {
+    type: String
+  },
+  descrip: {
+    type: String
+  },
+  posLat: {
+    type: String
+  },
+  posLng: {
+    type: String
+  }
+})
+
 const userSchema = new Schema({
   email: {
     type: String,
@@ -14,21 +32,7 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  businessName: {
-    type: String
-  },
-  contactNumber: {
-    type: String
-  },
-  descrip: {
-type: String
-  },
-  posLat: {
-    type: String
-  },
-  posLng: {
-    type: String
-  }
+  details: detailSchema
 
 })
 
@@ -81,8 +85,8 @@ userSchema.statics.login = async function (email, password) {
   }
 
   return user
-
-
 }
 
+
+module.exports - mongoose.model('Details',detailSchema)
 module.exports = mongoose.model('User', userSchema)

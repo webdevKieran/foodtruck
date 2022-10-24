@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { GoogleMap, MarkerF } from '@react-google-maps/api';
+import Marker from './Marker';
 
 
 // this is going to load the Google map from the Google Maps Platform
@@ -28,6 +29,7 @@ const mapOptions = useMemo(() => ({
     >
 
   <MarkerF position={{ lat: 52, lng: -8,}} ></MarkerF>
+  { /* <Marker */ }
     </GoogleMap>
 }
 
