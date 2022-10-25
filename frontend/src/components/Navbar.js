@@ -5,18 +5,22 @@ const Navbar = () => {
   
 return (
 <header>
-  <div className="container">
+ 
+  <div className='navbar navbar-light bg-light'>
+    <div className='container'>
     <Link to='/'>
-      <h3>Foodtruck Finder</h3>
+      <h1 className='display-5'>Foodtruck Finder</h1>
     </Link>
-    <nav>
-      <div>
-        <Link to='/Login'>Log In</Link>
+    </div>
+    <nav className='navbar navbar-expand-lg navbar-light bg-light'>
+      <div className='navbar-nav'>
+        <Link className='btn btn-outline-primary me-2' to='/Login'>Log In</Link>
       </div>
-      <div>
-        <Link to='/Signup'>Sign Up</Link>
+      <div className='nav-item'>
+        <Link className='btn btn-outline-success me-2' to='/Signup'>Sign Up</Link>
       </div>
     </nav>
+    
   </div>
 </header>
   )

@@ -8,9 +8,6 @@ const express = require('express')
 const mongoose = require('mongoose')
 const userRoutes = require('./routes/user')
 
-
-
-
 // express backend application
 const app = express()
 
@@ -25,10 +22,8 @@ app.use((req, res, next) =>{
 
 // routes
 app.get('/', (req, res) => {
-  res.json({mssg: 'Helo world'})
+  res.json({mssg: 'API is active'})
 })
-
-
 
 app.use('/api/user', userRoutes)
 
