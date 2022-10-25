@@ -88,5 +88,16 @@ userSchema.statics.login = async function (email, password) {
 }
 
 
-module.exports = mongoose.model('Details',detailSchema)
+
+
+// 25.10.12 turning this off temporarily so i can try to export 2 models
+
+//module.exports = mongoose.model('Details',detailSchema)
 module.exports = mongoose.model('User', userSchema)
+
+/*
+const Details = mongoose.model('details', detailSchema)
+const Users = mongoose.model('users', userSchema)
+
+module.exports = { Details, Users };
+*/
