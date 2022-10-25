@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { GoogleMap, MarkerF } from '@react-google-maps/api';
-import Marker from './Marker';
+import FindMarker from './FindMarker';
 
 
 // this is going to load the Google map from the Google Maps Platform
