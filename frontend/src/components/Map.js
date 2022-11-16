@@ -13,7 +13,7 @@ function Map() {
   const [myLong, setMyLong] = useState('')
   const [myLat, setMyLat] = useState('')
   const [error, setError] = useState('')
-
+  const [foodtruck, setFoodtruck] = useState([])
 
   // try to get the geolocation from the browser. 
   // useEffect with missing dependency intended to force only one load
@@ -26,7 +26,7 @@ function Map() {
      if(!("geolocation" in navigator)){
        setMyLat(53.349722)
        setMyLong(-6.260278)
-       setError('geolocation is not supported')
+       setError('Geolocation is not supported. Setting default marker.')
        console.log(error)
      }
      navigator.geolocation.getCurrentPosition(async function(pos){
@@ -46,32 +46,27 @@ function Map() {
 // v v v v v v
 //
 // test the infoWindow
-const markers = [
-  {
-    id: 1,
-    name: "Me",
-    position: { lat: parseFloat(myLat), lng: parseFloat(myLong) },
-    descrip: "Here I am!"
-  },
-  {
-    id: 2,
-    name: "Trucker Burgers",
-    position: { lat: 52.993 , lng: -6.983 },
-    descrip: "Here I am!"
-  },
-  {
-    id: 3,
-    name: "Athy Coffee",
-    position: { lat: 53, lng: -7 },
-    descrip: "Here I am!"
-  },
-  {
-    id: 4,
-    name: "Dublin Burgers",
-    position: { lat: 53.35092, lng: -6.26029 },
-    descrip: "Here I am!"
-  },
-]
+// poll the coordinates and position on the map
+
+ 
+
+
+// get all the locations from the api
+  useEffect (() => {
+  const fetchDetails = async () => {
+    const response = await fetch('/api/user')
+    const json = await response.json([])
+    
+    if(response.ok) {
+       setFoodtruck(json)
+    }
+  }
+    fetchDetails()
+  }, [])
+
+  // consume the details from  FindDetails
+
+
   const [ activeMarker, setActiveMarker ] = useState(null)
 
   const handleActiveMarker = (marker) => {
@@ -102,15 +97,19 @@ const mapOptions = useMemo(() => ({
 {console.log("coordinate ", myLat, myLong)}
  {// <MarkerF position={{ lat: parseFloat(myLat), lng: parseFloat(myLong),}} ></MarkerF> 
 }
-  {markers.map(({ id, name, position, descrip }) => (
+  {foodtruck.map((ft) => (
   <MarkerF
-          key={id}
-          position={position}
-          onClick={() => handleActiveMarker(id)}
+          key={ft.details._id}
+          position={{ lat: parseFloat(ft.details.posLat), lng: parseFloat(ft.details.posLng)}}
+          onClick={() => handleActiveMarker(ft.details._id)}
         >
-          {activeMarker === id ? (
+          {activeMarker === ft.details._id ? (
             <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-              <div><h4>{name}</h4>{descrip}</div>
+              <div><h5>{ft.details.businessName}</h5>
+              <i>{ft.details.descrip}</i><br />
+              Click to Call:
+              <a href={'tel:'+ft.details.contactNumber}>{ft.details.contactNumber}</a>
+              </div>
             </InfoWindow>
           ) : null}
         </MarkerF>

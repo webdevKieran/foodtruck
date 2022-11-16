@@ -5,7 +5,7 @@ import Home from './views/Home'
 import Login from "./views/Login";
 import Signup from "./views/Signup";
 import './App.css';
-import FindDetails from './components/FindDetails';
+
 
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
        </div>
       </BrowserRouter>
 
-    <FindDetails />
+    
     </div>
   );
 }
