@@ -19,20 +19,24 @@ const FindDetails=()=> {
     fetchDetails()
   }, [])
   
-return (
-  <div>
-    Here are the found food trucks:
-    {foodtruck && foodtruck.map((user) =>(
-      <p key={user._id}>USER DETAILS:<br/> 
-      ID {user._id}  <br/>
-      { /* Details {user.details} */}
-      
-      
-
-      </p>
-    ))}
-  </div>
-  )
+return ( 
+  <div className='container'> 
+    <h3>Here are the found food trucks:</h3> 
+    <div className='card-group'> 
+    {foodtruck && foodtruck.map((user) =>( 
+      <span className='card' key={(user._id)}> 
+        <div className='card-body'> 
+          <h5>Business: {user.details.businessName}</h5> 
+          Contact: {user.details.contactNumber}<br /> 
+          Description: {user.details.descrip}<br /> 
+          Lat: {user.details.posLat} Long: {user.details.posLng} 
+        </div>
+      </span> 
+    ))} 
+    </div> 
+  </div> 
+  ) 
 
 }
+
 export default FindDetails
