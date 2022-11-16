@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
-import { GoogleMap, MarkerF } from '@react-google-maps/api';
+import { GoogleMap, MarkerF, InfoWindow } from '@react-google-maps/api';
+
 
 // this is going to load the Google map from the Google Maps Platform
 // test data is being supplied for now
@@ -40,6 +41,48 @@ function Map() {
       })
    }
   
+
+/* active marker bit influenced by a code sandbox for simple map I saw once but coudn't find original author */
+// v v v v v v
+//
+// test the infoWindow
+const markers = [
+  {
+    id: 1,
+    name: "Me",
+    position: { lat: parseFloat(myLat), lng: parseFloat(myLong) },
+    descrip: "Here I am!"
+  },
+  {
+    id: 2,
+    name: "Trucker Burgers",
+    position: { lat: 52.993 , lng: -6.983 },
+    descrip: "Here I am!"
+  },
+  {
+    id: 3,
+    name: "Athy Coffee",
+    position: { lat: 53, lng: -7 },
+    descrip: "Here I am!"
+  },
+  {
+    id: 4,
+    name: "Dublin Burgers",
+    position: { lat: 53.35092, lng: -6.26029 },
+    descrip: "Here I am!"
+  },
+]
+  const [ activeMarker, setActiveMarker ] = useState(null)
+
+  const handleActiveMarker = (marker) => {
+    if (marker === activeMarker) {
+      return;
+    }
+    setActiveMarker(marker);
+  };
+// ^ ^ ^ ^ 
+
+
 // load the defalut map position which won't be re-rendered with the map each time because no dependencies:
 const centreMap = useMemo(() => ({ lat: 53, lng: -8 }), []);
 const mapOptions = useMemo(() => ({
@@ -47,14 +90,33 @@ const mapOptions = useMemo(() => ({
   mapId: "4408b1486b24d7f3" 
 }),[])
 
-  return <div> <GoogleMap 
+  return <div> 
+    <GoogleMap 
     zoom={8} 
     center={ centreMap }
     options={ mapOptions} 
     mapContainerClassName="map-container" 
     >
+      onClick={() => setActiveMarker(null)}
+
 {console.log("coordinate ", myLat, myLong)}
-  <MarkerF position={{ lat: parseFloat(myLat), lng: parseFloat(myLong),}} ></MarkerF>
+ {// <MarkerF position={{ lat: parseFloat(myLat), lng: parseFloat(myLong),}} ></MarkerF> 
+}
+  {markers.map(({ id, name, position, descrip }) => (
+  <MarkerF
+          key={id}
+          position={position}
+          onClick={() => handleActiveMarker(id)}
+        >
+          {activeMarker === id ? (
+            <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+              <div><h4>{name}</h4>{descrip}</div>
+            </InfoWindow>
+          ) : null}
+        </MarkerF>
+  ))}
+
+
   { /* <GeoCoords /> */ }
   { /* <Marker */ }
     </GoogleMap>
