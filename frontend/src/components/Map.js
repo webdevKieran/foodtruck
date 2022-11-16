@@ -95,8 +95,8 @@ const mapOptions = useMemo(() => ({
       onClick={() => setActiveMarker(null)}
 
 {console.log("coordinate ", myLat, myLong)}
- {// <MarkerF position={{ lat: parseFloat(myLat), lng: parseFloat(myLong),}} ></MarkerF> 
-}
+ <MarkerF position={{ lat: parseFloat(myLat), lng: parseFloat(myLong),}} ></MarkerF> 
+
   {foodtruck.map((ft) => (
   <MarkerF
           key={ft.details._id}
@@ -107,7 +107,7 @@ const mapOptions = useMemo(() => ({
             <InfoWindow onCloseClick={() => setActiveMarker(null)}>
               <div><h5>{ft.details.businessName}</h5>
               <i>{ft.details.descrip}</i><br />
-              Click to Call:
+              Click to Call: 
               <a href={'tel:'+ft.details.contactNumber}>{ft.details.contactNumber}</a>
               </div>
             </InfoWindow>

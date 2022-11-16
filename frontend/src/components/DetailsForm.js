@@ -49,7 +49,7 @@ const DetailsForm = () => {
   }
 
   return(
-    <div className='container'>
+    <div className='container formBg'>
     
     <form className="detailsForm" onSubmit={handleSubmit}>
       <h3>Update your business details</h3>
@@ -93,7 +93,7 @@ const DetailsForm = () => {
         hidden="true"
         /><p />
 
-        <button>Update Your Business Details</button>
+        <button className='btn btn-warning btn-lg'> Update Your Business Details</button>
         {error && <div className="error">{error}</div>}
         </form>
 

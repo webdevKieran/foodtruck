@@ -19,7 +19,7 @@ const Login = () => {
 
 
   return (
-    <div className='container'>
+    <div className='container formBg'>
        <form className='login' onSubmit={handleSubmit} hidden={login}>
         <h3>Log in</h3>
         <div className='row mb-2'>
@@ -39,7 +39,8 @@ const Login = () => {
           className='form-control'
         />
         </div>
-        <button disabled={isLoading} >Log in</button>
+        <br />
+        <button className='btn btn-primary btn-lg' disabled={isLoading} >Log in</button>
         {error&&<div className="error">{error}</div>}
       </form>
       <br />
