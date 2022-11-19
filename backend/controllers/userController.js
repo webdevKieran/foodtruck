@@ -48,8 +48,11 @@ const signupUser = async (req, res) => {
 // get all users --> this will be narrowed down to just the detail 
 // to populate the appropriate infobox on the map marker
 
+// query find(), if no condition specified, attempts to return all docs
+// but cannot select 'details' if that doesn't exist, so it crashes
+
 const getUsers = async (req, res) => {
-  const users = await User.find({}).select('details')
+  const users = await User.find({details: {$exists: true} }).select('details')
 
   res.status(200).json(users)
 }
@@ -103,22 +106,6 @@ const createDetails = async (req, res) => {
 
 }
 
-// add doc to db -> this operation doesn;t make sense. 
-// When a user signs up the ID is created. We are just adding new fields, not creating a doc
-// so the Update should be sufficient using updateDetails below.
-//
-// I will leave this in the comments anyway for posterity
-
-//
-//  try{
-//   const user = await User.create({businessName, contactNumber, descrip, posLat, posLng})
-//    res.status(200).json(user)
-//  } catch (error){
-//    res.status(400).json({error: error.message})
-//  }
-// }
-
-// delete the user doc details
 
 const deleteDetails = async (req, res) => {
   const { id } = req.params
