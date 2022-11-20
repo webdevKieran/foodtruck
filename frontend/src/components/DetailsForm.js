@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import GeoLocation from '../views/GeoLocation'
 import  { useDetailsContext } from '../hooks/useDetailsContext'
+import { useAuthContext } from "../hooks/useAuthContext"
 
 // update the business details
 const DetailsForm = () => {
@@ -12,6 +13,7 @@ const DetailsForm = () => {
   const [posLng, setPosLng ] = useState('')
   const [error, setError] = useState('')
   const [emptyFields, setEmptyFields] = useState('')
+  const { user } = useAuthContext()
 
   const handleSubmit = async (e) => {
     e.preventDefault()

@@ -1,5 +1,5 @@
 // placeholder for login page
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import DetailsForm from '../components/DetailsForm'
 import { useLogin } from '../hooks/useLogin'
 import { useAuthContext } from "../hooks/useAuthContext"
@@ -9,16 +9,35 @@ const Login = () => {
   const [password, setPassword] =  useState('')
   const { login, error, isLoading } = useLogin()
   const { user } = useAuthContext()
+  const [details, setDetails] = useState('[]')
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
 
     await login(email, password)
+    console.log("email: ",email,user.id)
+    
   }
+/* get the remaining details of the logged in user */
+/*
 
+  where email= the logged in user, get _id
 
+  useEffect (() => {
+    const fetchDetails = async () => {
+      const response = await fetch('/api/user')
+      const json = await response.json([])
+      
+      if(response.ok) {
+         setDetails(json)
+      }
+    }
+      fetchDetails()
+    }, [])
+*/
 
   return (
+    <div className="login">
     <div className='container formBg'>
        <form className='login' onSubmit={handleSubmit} hidden={login}>
         <h3>Log in</h3>
@@ -44,12 +63,12 @@ const Login = () => {
         {error&&<div className="error">{error}</div>}
       </form>
       <br />
-      {/* this section should hide the details until state changed to user logged in
-      I think the best way is to create a handler for the div with a value hidden if handler is true*/}
+      {/* this section should hide the details until state changed to user logged in */}
       {user && <div className='container'>
       <DetailsForm />
       </div>
       }
+    </div>
     </div>
   )
 }

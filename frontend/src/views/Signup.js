@@ -14,8 +14,9 @@ const Signup = () => {
   }
 
     // note the button is disabled if state isLoading is true
-  return (
-    <div className='container'>
+return (
+ <div className="login">
+   <div className='container'>
     <form className='signup' onSubmit={handleSubmit}>
       <h3>Sign up</h3>
       <div className='row mb-2'>
@@ -38,7 +39,8 @@ const Signup = () => {
       <button className="btn btn-success btn-lg" disabled={isLoading}>Sign up</button> 
       {error && <div className="error">{error}</div>}
     </form>
-    </div>
+   </div>
+ </div>
   )
 }
 

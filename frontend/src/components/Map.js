@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { GoogleMap, MarkerF, InfoWindow } from '@react-google-maps/api';
+import logo32 from '../img/logo32.png'
 
 
 // this is going to load the Google map from the Google Maps Platform
@@ -102,6 +103,7 @@ const mapOptions = useMemo(() => ({
           key={ft.details._id}
           position={{ lat: parseFloat(ft.details.posLat), lng: parseFloat(ft.details.posLng)}}
           onClick={() => handleActiveMarker(ft.details._id)}
+          icon={logo32}
         >
           {activeMarker === ft.details._id ? (
             <InfoWindow onCloseClick={() => setActiveMarker(null)}>
@@ -119,6 +121,10 @@ const mapOptions = useMemo(() => ({
   { /* <GeoCoords /> */ }
   { /* <Marker */ }
     </GoogleMap>
+
+    
+    <a className="attrib" href="https://www.flaticon.com/free-icons/food-truck" title="food truck icons" >Food truck icons created by mavadee - Flaticon</a>
+
    {error && <div className='container-md alert alert-danger'> {error}</div>}</div>
 }
 
