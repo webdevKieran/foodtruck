@@ -1,15 +1,12 @@
 import { useState } from 'react'
-import GeoLocation from '../views/GeoLocation'
-import  { useDetailsContext } from '../hooks/useDetailsContext'
 import { useAuthContext } from "../hooks/useAuthContext"
 
 // update the business details
 const DetailsForm = () => {
-  const { dispatch } = useDetailsContext
   const [businessName, setBusinessName ] = useState('')
   const [contactNumber, setContactNumber ] = useState('')
   const [descrip, setDescrip ] = useState('')
-  const [posLat, setPosLat ] = useState('posLat')
+  const [posLat, setPosLat ] = useState('')
   const [posLng, setPosLng ] = useState('')
   const [error, setError] = useState('')
   const [emptyFields, setEmptyFields] = useState('')
@@ -25,7 +22,7 @@ const DetailsForm = () => {
       posLat,
       posLng }
 
-    const response = await fetch('/api/updateDetails', {
+    const response = await fetch('/api/user/'+user._id, {
       method: 'POST',
       body: JSON.stringify(details),
       headers: {
@@ -40,13 +37,8 @@ const DetailsForm = () => {
     setEmptyFields(json.emptyFields)
   }
   if(response.ok) {
-    setBusinessName('')
-    setContactNumber('')
-    setDescrip('')
-    setError(null)
-    setEmptyFields([])
-    console.log('new workout added', json)
-    dispatch({type: 'CREATE_WORKOUT', payload: json})
+    console.log('details updated', json)
+
   }
   }
 
@@ -84,13 +76,13 @@ const DetailsForm = () => {
         
         <input type="text"
         onChange={(e) => setPosLat(e.target.value)}
-        value={GeoLocation.lat}
+        value={posLat}
         className={emptyFields.includes('posLat') ? 'error':'form-control'}
         hidden="true"
         />
         <input type="text"
         onChange={(e) => setPosLng(e.target.value)}
-        value={GeoLocation.lng}
+        value={posLng}
         className={emptyFields.includes('posLng') ? 'error':'form-control'}
         hidden="true"
         /><p />

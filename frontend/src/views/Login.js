@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import DetailsForm from '../components/DetailsForm'
 import { useLogin } from '../hooks/useLogin'
 import { useAuthContext } from "../hooks/useAuthContext"
+import unsplash from '../img/unsplash.jpg'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -15,7 +16,7 @@ const Login = () => {
     e.preventDefault()
 
     await login(email, password)
-    console.log("email: ",email,user.id)
+    
     
   }
 /* get the remaining details of the logged in user */
@@ -36,9 +37,12 @@ const Login = () => {
     }, [])
 */
 
+
   return (
-    <div className="login">
-    <div className='container formBg'>
+    <div className="row">
+      <span className='col banner'><img className='img-fluid' src={unsplash} alt='guy with foodtruck'/></span>
+    <div className='col formBg'>
+      {!user &&
        <form className='login' onSubmit={handleSubmit} hidden={login}>
         <h3>Log in</h3>
         <div className='row mb-2'>
@@ -62,6 +66,7 @@ const Login = () => {
         <button className='btn btn-primary btn-lg' disabled={isLoading} >Log in</button>
         {error&&<div className="error">{error}</div>}
       </form>
+      }
       <br />
       {/* this section should hide the details until state changed to user logged in */}
       {user && <div className='container'>
@@ -69,6 +74,8 @@ const Login = () => {
       </div>
       }
     </div>
+  <span className='attrib'> Photo by <a href="https://unsplash.com/@arturorey?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Arturo Rey</a> on <a href="https://unsplash.com/s/photos/food-truck?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  </span> 
     </div>
   )
 }

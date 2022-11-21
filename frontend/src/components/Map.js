@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { GoogleMap, MarkerF, InfoWindow } from '@react-google-maps/api';
+import { GoogleMap, MarkerF, InfoWindowF } from '@react-google-maps/api';
 import logo32 from '../img/logo32.png'
 
 
@@ -93,7 +93,9 @@ const mapOptions = useMemo(() => ({
     options={ mapOptions} 
     mapContainerClassName="map-container" 
     >
-      onClick={() => setActiveMarker(null)}
+     {
+     //onClick={() => setActiveMarker(null)} 
+      }
 
 {console.log("coordinate ", myLat, myLong)}
  <MarkerF position={{ lat: parseFloat(myLat), lng: parseFloat(myLong),}} ></MarkerF> 
@@ -106,20 +108,17 @@ const mapOptions = useMemo(() => ({
           icon={logo32}
         >
           {activeMarker === ft.details._id ? (
-            <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+            <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
               <div><h5>{ft.details.businessName}</h5>
               <i>{ft.details.descrip}</i><br />
               Click to Call: 
               <a href={'tel:'+ft.details.contactNumber}>{ft.details.contactNumber}</a>
               </div>
-            </InfoWindow>
+            </InfoWindowF>
           ) : null}
         </MarkerF>
   ))}
 
-
-  { /* <GeoCoords /> */ }
-  { /* <Marker */ }
     </GoogleMap>
 
     
