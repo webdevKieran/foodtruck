@@ -1,8 +1,10 @@
-import { useState } from 'react'
-import { useAuthContext } from "../hooks/useAuthContext"
+import { useState, useEffect } from 'react'
+import  { useDetailsContext } from '../hooks/useDetailsContext'
+
 
 // update the business details
 const DetailsForm = () => {
+  const { dispatch } = useDetailsContext
   const [businessName, setBusinessName ] = useState('')
   const [contactNumber, setContactNumber ] = useState('')
   const [descrip, setDescrip ] = useState('')
@@ -10,7 +12,27 @@ const DetailsForm = () => {
   const [posLng, setPosLng ] = useState('')
   const [error, setError] = useState('')
   const [emptyFields, setEmptyFields] = useState('')
-  const { user } = useAuthContext()
+
+
+  // get the co-ordinates for details
+  useEffect (()=> {
+    getCoords();
+  }, []);
+   
+  // if no geolocation place a default marker on the Spire in Dublin, else get them
+   const getCoords = async function(){
+     if(!("geolocation" in navigator)){
+       setError('Geolocation is not supported. Setting default marker.')
+       console.log(error)
+     }
+     navigator.geolocation.getCurrentPosition(async function(pos){
+       setPosLat(pos.coords.latitude)
+       setPosLng(pos.coords.longitude)
+  // if there is an error, like prompt for access to locatin is denied, log the error.  
+     }
+     , function(err){
+      setError("User denied geo access")
+      })}
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -22,7 +44,7 @@ const DetailsForm = () => {
       posLat,
       posLng }
 
-    const response = await fetch('/api/user/'+user._id, {
+    const response = await fetch('/api/updateDetails', {
       method: 'POST',
       body: JSON.stringify(details),
       headers: {
@@ -37,8 +59,13 @@ const DetailsForm = () => {
     setEmptyFields(json.emptyFields)
   }
   if(response.ok) {
-    console.log('details updated', json)
-
+    setBusinessName('')
+    setContactNumber('')
+    setDescrip('')
+    setError(null)
+    setEmptyFields([])
+    console.log('foodtruk details added', json)
+    dispatch({type: 'CREATE_WORKOUT', payload: json})
   }
   }
 

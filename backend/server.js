@@ -1,12 +1,12 @@
 // Express app inspired by NetNinja MERN stack tutorial 
 // available on Youtube: https://youtu.be/8DploTqLstE
 
-
 // load environment variables from .env file
 const dotenv = require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const userRoutes = require('./routes/user')
+const detailRoutes = require('./routes/details')
 
 // express backend application
 const app = express()
@@ -24,7 +24,7 @@ app.use((req, res, next) =>{
 app.get('/', (req, res) => {
   res.json({mssg: 'API is active'})
 })
-
+app.use('/api/details', detailRoutes)
 app.use('/api/user', userRoutes)
 
 // mongoose library used to simplify interacting with MongoDB

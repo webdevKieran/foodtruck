@@ -21,7 +21,9 @@ return (
     <nav className='navbar navbar-expand-lg navbar-light' >
       {user && (
         <div>
-          <span className='email'>{user.email}</span>
+          <Link to='/Login'>
+            <span className='email'>{user.email}</span>
+          </Link>
           <button className='btn btn-outline-danger me-2' onClick={handleClick}>Logout</button>
         </div>
       )}

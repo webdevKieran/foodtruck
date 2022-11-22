@@ -2,11 +2,6 @@ import { useState, useEffect, useMemo } from 'react';
 import { GoogleMap, MarkerF, InfoWindowF } from '@react-google-maps/api';
 import logo32 from '../img/logo32.png'
 
-
-// this is going to load the Google map from the Google Maps Platform
-// test data is being supplied for now
-// this will become dynamic data for each foodtruck
-
 // GoogleMap is the layout of the initial map shown to user
 // Marker is supplied for each foodtruck
 
@@ -42,20 +37,11 @@ function Map() {
       })
    }
   
-
-/* active marker bit influenced by a code sandbox for simple map I saw once but coudn't find original author */
-// v v v v v v
-//
-// test the infoWindow
-// poll the coordinates and position on the map
-
- 
-
-
-// get all the locations from the api
+// get all the foodtruck details from the api
+// and fill in the infoWindow component
   useEffect (() => {
   const fetchDetails = async () => {
-    const response = await fetch('/api/user')
+    const response = await fetch('/api/details')
     const json = await response.json([])
     
     if(response.ok) {
@@ -65,9 +51,7 @@ function Map() {
     fetchDetails()
   }, [])
 
-  // consume the details from  FindDetails
-
-
+// handle the active marker to show infoWindow
   const [ activeMarker, setActiveMarker ] = useState(null)
 
   const handleActiveMarker = (marker) => {
@@ -76,15 +60,18 @@ function Map() {
     }
     setActiveMarker(marker);
   };
-// ^ ^ ^ ^ 
 
-
-// load the defalut map position which won't be re-rendered with the map each time because no dependencies:
+// load the default map position which won't be re-rendered with the map each time because no dependencies:
 const centreMap = useMemo(() => ({ lat: 53, lng: -8 }), []);
 const mapOptions = useMemo(() => ({
   disableDefaultUI: true,
   mapId: "4408b1486b24d7f3" 
 }),[])
+
+
+// render the map, with custom params
+// and insert each foodtruck into the map as Marker - see MarkerF component
+// insert the details from DB into each infoWindow - see infoWindowF component
 
   return <div> 
     <GoogleMap 
@@ -97,7 +84,7 @@ const mapOptions = useMemo(() => ({
      //onClick={() => setActiveMarker(null)} 
       }
 
-{console.log("coordinate ", myLat, myLong)}
+{console.log("coordinates ", myLat, myLong)}
  <MarkerF position={{ lat: parseFloat(myLat), lng: parseFloat(myLong),}} ></MarkerF> 
 
   {foodtruck.map((ft) => (
@@ -120,7 +107,6 @@ const mapOptions = useMemo(() => ({
   ))}
 
     </GoogleMap>
-
     
     <a className="attrib" href="https://www.flaticon.com/free-icons/food-truck" title="food truck icons" >Food truck icons created by mavadee - Flaticon</a>
 
