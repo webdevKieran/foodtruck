@@ -3,10 +3,8 @@ const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 
 // how to create token and use MongoDB id in the payload
-
 const createToken = (_id) => {
   return jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d'})
-
 }
 
 // login user with method from userModel
@@ -24,9 +22,7 @@ const loginUser = async (req, res) => {
   } catch (error){
     res.status(400).json({error: error.message})
   }
-
 }
-
 
 // sign-up user
 const signupUser = async (req, res) => {
@@ -45,14 +41,10 @@ const signupUser = async (req, res) => {
 
 }
 
-// get all users --> this will be narrowed down to just the detail 
-// to populate the appropriate infobox on the map marker
+// query find(), if no condition specified, attempts to return all docs
+// but cannot select 'details' if that doesn't exist, so it crashes
 
-const getUsers = async (req, res) => {
-  const users = await User.find({}).select('details')
 
-  res.status(200).json(users)
-}
 
 // get a single User
 const getUser = async(req,res) => {
@@ -70,6 +62,14 @@ const getUser = async(req,res) => {
 
   res.status(200).json(user)
 }
+
+// get the current user ID >>> how to get current from knowing email
+const getID = async (req, res) => {
+  const findEmail = await User.findOne({ email: {$eq: email} })
+  res.status(200).json(findEmail)
+
+}
+  
 
 // create aditional fields in the user document
 
@@ -103,22 +103,6 @@ const createDetails = async (req, res) => {
 
 }
 
-// add doc to db -> this operation doesn;t make sense. 
-// When a user signs up the ID is created. We are just adding new fields, not creating a doc
-// so the Update should be sufficient using updateDetails below.
-//
-// I will leave this in the comments anyway for posterity
-
-//
-//  try{
-//   const user = await User.create({businessName, contactNumber, descrip, posLat, posLng})
-//    res.status(200).json(user)
-//  } catch (error){
-//    res.status(400).json({error: error.message})
-//  }
-// }
-
-// delete the user doc details
 
 const deleteDetails = async (req, res) => {
   const { id } = req.params
@@ -157,4 +141,4 @@ const updateDetails = async (req, res) => {
 
 
 
-module.exports = { signupUser, loginUser, getUser, getUsers, updateDetails, deleteDetails }
+module.exports = { signupUser, loginUser, getUser, getID, updateDetails, deleteDetails }

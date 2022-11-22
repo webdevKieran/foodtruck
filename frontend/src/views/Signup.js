@@ -1,6 +1,7 @@
 // placeholder for signup page
 import { useState } from 'react'
 import { useSignup } from '../hooks/useSignup'
+import unsplash from '../img/unsplash.jpg'
 
 const Signup = () => {
   const [email, setEmail] = useState('')
@@ -14,8 +15,12 @@ const Signup = () => {
   }
 
     // note the button is disabled if state isLoading is true
-  return (
-    <div className='container'>
+return (
+  <div className="row">
+      <span className='col banner'><img className='img-fluid' src={unsplash} alt='guy with foodtruck'/></span>
+      
+ <div className="col formBg">
+   <div className='container'>
     <form className='signup' onSubmit={handleSubmit}>
       <h3>Sign up</h3>
       <div className='row mb-2'>
@@ -38,7 +43,11 @@ const Signup = () => {
       <button className="btn btn-success btn-lg" disabled={isLoading}>Sign up</button> 
       {error && <div className="error">{error}</div>}
     </form>
-    </div>
+   </div>
+ </div>
+ <span className='attrib'> Photo by <a href="https://unsplash.com/@arturorey?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Arturo Rey</a> on <a href="https://unsplash.com/s/photos/food-truck?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  </span> 
+ </div>
   )
 }
 

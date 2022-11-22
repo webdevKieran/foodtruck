@@ -5,7 +5,7 @@ const {
   signupUser, 
   loginUser,
   getUser,
-  getUsers,
+  getID,
   deleteDetails,
   updateDetails
  } = require('../controllers/userController')
@@ -22,11 +22,13 @@ router.post('/login', loginUser)
 router.post('/signup', signupUser)
 
 
-// GET all users
-router.get('/', getUsers)
 
 // GET a single user
 router.get('/:id', getUser)
+
+// Get ID of current user
+
+router.get('/getid', getID)
 
 
 // DELETE details from a user doc

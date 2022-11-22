@@ -24,17 +24,43 @@
   color: white;
 }
 
+.display-5{
+  color: white
+}
 
+.attrib {
+  margin-top: 4em;
+  font-size: x-small;
+  color: dimgray;
+}
 
+.h1 {
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar{
+  background-color: rgba(16, 7, 54, 0.986);
+}
+
+.banner{
+height:null;
+flex: 1;
+ min-height: 70vh;
+}
+.email{
+  color: antiquewhite;
+  padding: 12px;
+}
 .map-container {
   width: 100%;
   height: 70vh;
 }
 
-/* .formBg {
-  background-color: gray;
-  padding: 1em;
+.formBg {
+  margin-top: 20px;
 }
+/*
 .detailsForm {
   width: 30em;
   margin: 1% 30%;

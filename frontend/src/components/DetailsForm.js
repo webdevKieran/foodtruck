@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import GeoLocation from '../views/GeoLocation'
+import { useState, useEffect } from 'react'
 import  { useDetailsContext } from '../hooks/useDetailsContext'
+
 
 // update the business details
 const DetailsForm = () => {
@@ -8,10 +8,31 @@ const DetailsForm = () => {
   const [businessName, setBusinessName ] = useState('')
   const [contactNumber, setContactNumber ] = useState('')
   const [descrip, setDescrip ] = useState('')
-  const [posLat, setPosLat ] = useState('posLat')
+  const [posLat, setPosLat ] = useState('')
   const [posLng, setPosLng ] = useState('')
   const [error, setError] = useState('')
   const [emptyFields, setEmptyFields] = useState('')
+
+
+  // get the co-ordinates for details
+  useEffect (()=> {
+    getCoords();
+  }, []);
+   
+  // if no geolocation place a default marker on the Spire in Dublin, else get them
+   const getCoords = async function(){
+     if(!("geolocation" in navigator)){
+       setError('Geolocation is not supported. Setting default marker.')
+       console.log(error)
+     }
+     navigator.geolocation.getCurrentPosition(async function(pos){
+       setPosLat(pos.coords.latitude)
+       setPosLng(pos.coords.longitude)
+  // if there is an error, like prompt for access to locatin is denied, log the error.  
+     }
+     , function(err){
+      setError("User denied geo access")
+      })}
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -43,7 +64,7 @@ const DetailsForm = () => {
     setDescrip('')
     setError(null)
     setEmptyFields([])
-    console.log('new workout added', json)
+    console.log('foodtruk details added', json)
     dispatch({type: 'CREATE_WORKOUT', payload: json})
   }
   }
@@ -82,13 +103,13 @@ const DetailsForm = () => {
         
         <input type="text"
         onChange={(e) => setPosLat(e.target.value)}
-        value={GeoLocation.lat}
+        value={posLat}
         className={emptyFields.includes('posLat') ? 'error':'form-control'}
         hidden="true"
         />
         <input type="text"
         onChange={(e) => setPosLng(e.target.value)}
-        value={GeoLocation.lng}
+        value={posLng}
         className={emptyFields.includes('posLng') ? 'error':'form-control'}
         hidden="true"
         /><p />
