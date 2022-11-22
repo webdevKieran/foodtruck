@@ -5,6 +5,7 @@ import Home from './views/Home'
 import Login from "./views/Login";
 import Signup from "./views/Signup";
 import './App.css';
+import NotFound from './views/NotFound';
 
 
 
@@ -27,6 +28,10 @@ function App() {
             <Route
               path="/Signup"
               element={<Signup />}
+            />
+            <Route
+            path="*"
+            element={<NotFound />}
             />
           </Routes>
        </div>
