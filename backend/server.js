@@ -7,6 +7,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const userRoutes = require('./routes/user')
 const detailRoutes = require('./routes/details')
+const updateRoutes = require('./routes/update')
 
 // express backend application
 const app = express()
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
   res.json({mssg: 'API is active'})
 })
 app.use('/api/details', detailRoutes)
+app.use('/api/update', updateRoutes)
 app.use('/api/user', userRoutes)
 
 // mongoose library used to simplify interacting with MongoDB

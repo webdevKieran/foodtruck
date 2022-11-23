@@ -44,7 +44,7 @@ const signupUser = async (req, res) => {
 // query find(), if no condition specified, attempts to return all docs
 // but cannot select 'details' if that doesn't exist, so it crashes
 
-
+/*  >>> this is all moved to the updateController
 
 // get a single User
 const getUser = async(req,res) => {
@@ -69,10 +69,8 @@ const getID = async (req, res) => {
   res.status(200).json(findEmail)
 
 }
-  
 
 // create aditional fields in the user document
-
 
 const createDetails = async (req, res) => {
   const {businessName, contactNumber, descrip, posLat, posLng} = req.body
@@ -94,8 +92,8 @@ const createDetails = async (req, res) => {
     emptyFields.push('posLng')
   }
 
+  
   // section below asks for all details but that isn;t necessary just yet KF 14-10-2022
-
 
 //  if(emptyFields.length >0) {
 //    return res.status(400).json({error: 'Please fill in all fields', emptyFields })
@@ -138,7 +136,6 @@ const updateDetails = async (req, res) => {
 }
 
 
+*/
 
-
-
-module.exports = { signupUser, loginUser, getUser, getID, updateDetails, deleteDetails }
+module.exports = { signupUser, loginUser } 

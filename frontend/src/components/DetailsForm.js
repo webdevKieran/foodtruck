@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import  { useDetailsContext } from '../hooks/useDetailsContext'
-
+import { useDetailsContext } from '../hooks/useDetailsContext'
+import {useAuthContext} from '../hooks/useAuthContext'
 
 // update the business details
 const DetailsForm = () => {
@@ -11,8 +11,10 @@ const DetailsForm = () => {
   const [posLat, setPosLat ] = useState('')
   const [posLng, setPosLng ] = useState('')
   const [error, setError] = useState('')
-  const [emptyFields, setEmptyFields] = useState('')
+  const [emptyFields, setEmptyFields] = useState([])
 
+  //you need to be logged in
+    const {user} = useAuthContext()
 
   // get the co-ordinates for details
   useEffect (()=> {
@@ -44,11 +46,12 @@ const DetailsForm = () => {
       posLat,
       posLng }
 
-    const response = await fetch('/api/updateDetails', {
+    const response = await fetch('/api/update/details', {
       method: 'POST',
       body: JSON.stringify(details),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
       }
     })
 
@@ -65,7 +68,7 @@ const DetailsForm = () => {
     setError(null)
     setEmptyFields([])
     console.log('foodtruk details added', json)
-    dispatch({type: 'CREATE_WORKOUT', payload: json})
+    dispatch({type: 'CREATE_DETAILS', payload: json})
   }
   }
 
