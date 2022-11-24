@@ -11,7 +11,7 @@ const DetailsForm = () => {
   const [posLat, setPosLat ] = useState('')
   const [posLng, setPosLng ] = useState('')
   const [error, setError] = useState('')
-  const [emptyFields, setEmptyFields] = useState([])
+
 
   //you need to be logged in
     const {user} = useAuthContext()
@@ -46,6 +46,8 @@ const DetailsForm = () => {
       posLat,
       posLng }
 
+      // timeout of fetch request
+
     const response = await fetch('/api/update/details', {
       method: 'POST',
       body: JSON.stringify(details),
@@ -59,14 +61,12 @@ const DetailsForm = () => {
 
   if(!response.ok) {
     setError(json.error)
-    setEmptyFields(json.emptyFields)
   }
   if(response.ok) {
     setBusinessName('')
     setContactNumber('')
     setDescrip('')
     setError(null)
-    setEmptyFields([])
     console.log('foodtruk details added', json)
     dispatch({type: 'CREATE_DETAILS', payload: json})
   }
@@ -83,7 +83,7 @@ const DetailsForm = () => {
         type="text"
         onChange={(e) => setBusinessName(e.target.value)}
         value={businessName}
-        className={emptyFields.includes('businessName') ? 'error':'form-control'}
+        className='form-control'
         /><p />
 
       <label className='form-label'>Contact Telephone Number:</label>
@@ -91,7 +91,7 @@ const DetailsForm = () => {
         type="number"
         onChange={(e) => setContactNumber(e.target.value)}
         value={contactNumber}
-        className={emptyFields.includes('contactNumber') ? 'error':'form-control'}
+        className='form-control'
         /><p />
 
       <label className='form-label'>Description:</label>
@@ -101,19 +101,19 @@ const DetailsForm = () => {
         value={descrip}
         id='exampleFormControlTextarea1'
         rows='3'
-        className={emptyFields.includes('descrip') ? 'error':'form-control'}
+        className='form-control'
         />
         
         <input type="text"
         onChange={(e) => setPosLat(e.target.value)}
         value={posLat}
-        className={emptyFields.includes('posLat') ? 'error':'form-control'}
+        className='form-control'
         hidden="true"
         />
         <input type="text"
         onChange={(e) => setPosLng(e.target.value)}
         value={posLng}
-        className={emptyFields.includes('posLng') ? 'error':'form-control'}
+        className='form-control'
         hidden="true"
         /><p />
 

@@ -17,18 +17,20 @@ const Signup = () => {
     // note the button is disabled if state isLoading is true
 return (
   <div className="row">
-      <span className='col banner'><img className='img-fluid' src={unsplash} alt='guy with foodtruck'/></span>
+      <span className='col banner'><img className='img-fluid' src={unsplash} alt='guy with foodtruck making crepes'/></span>
       
  <div className="col formBg">
    <div className='container'>
     <form className='signup' onSubmit={handleSubmit}>
       <h3>Sign up</h3>
+      <p><i>To register for Foodtruck Finder, you must enter your email address and a strong password.</i></p>
       <div className='row mb-2'>
       <label className='form-label'>Email:</label>
       <input
         type="email"
         onChange={(e) => setEmail(e.target.value)}
         value={email}
+        
       />
       </div>
       <div className='row mb-2'>
@@ -37,10 +39,11 @@ return (
         type="password"
         onChange={(e) => setPassword(e.target.value)}
         value={password}
+        className='form-control'
       />
       </div>
       <br />
-      <button className="btn btn-success btn-lg" disabled={isLoading}>Sign up</button> 
+      <button className="btn btn-warning btn-lg" disabled={isLoading}>Sign up</button> 
       {error && <div className="error">{error}</div>}
     </form>
    </div>
