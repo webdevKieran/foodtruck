@@ -19,7 +19,7 @@ router.delete('/:id', deleteUser)
 router.patch('/:id', updateDetails)
 
 // CREATE user details
-router.post('/details', createDetails)
+router.post('/:id', createDetails)
 
 
 module.exports = router
