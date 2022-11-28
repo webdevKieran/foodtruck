@@ -10,37 +10,19 @@ const Login = () => {
   const [password, setPassword] =  useState('')
   const { login, error, isLoading } = useLogin()
   const { user } = useAuthContext()
-  const [details, setDetails] = useState('[]')
+
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
 
     await login(email, password)
-    
-    
+        
   }
-/* get the remaining details of the logged in user */
-/*
-
-  where email= the logged in user, get _id
-
-  useEffect (() => {
-    const fetchDetails = async () => {
-      const response = await fetch('/api/user')
-      const json = await response.json([])
-      
-      if(response.ok) {
-         setDetails(json)
-      }
-    }
-      fetchDetails()
-    }, [])
-*/
 
 
   return (
     <div className="row">
-      <span className='col banner'><img className='img-fluid' src={unsplash} alt='guy with foodtruck'/></span>
+      <span className='col banner'><img className='img-fluid' src={unsplash} alt='guy with foodtruck making crepes' /></span>
     <div className='col formBg'>
       {!user &&
        <form className='login' onSubmit={handleSubmit} hidden={login}>
@@ -70,7 +52,9 @@ const Login = () => {
       <br />
       {/* this section should hide the details until state changed to user logged in */}
       {user && <div className='container'>
+
       <DetailsForm />
+
       </div>
       }
     </div>

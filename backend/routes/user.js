@@ -4,10 +4,7 @@ const express = require('express')
 const { 
   signupUser, 
   loginUser,
-  getUser,
-  getID,
-  deleteDetails,
-  updateDetails
+
  } = require('../controllers/userController')
 
 const router = express.Router()
@@ -21,7 +18,7 @@ router.post('/login', loginUser)
 // sign-up route
 router.post('/signup', signupUser)
 
-
+/*  >> moved into a separate 'update' api route
 
 // GET a single user
 router.get('/:id', getUser)
@@ -41,5 +38,6 @@ router.delete('/:id', deleteDetails)
 // *this doesn't make sense since we have ID already. Commented out for now*
 //
 //router.patch('/:id', createDetails)
+*/
 
 module.exports = router

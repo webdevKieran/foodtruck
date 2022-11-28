@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { GoogleMap, MarkerF, InfoWindowF } from '@react-google-maps/api';
-import logo32 from '../img/logo32.png'
+import logo64 from '../img/logo64.png'
 
 // GoogleMap is the layout of the initial map shown to user
 // Marker is supplied for each foodtruck
@@ -92,7 +92,7 @@ const mapOptions = useMemo(() => ({
           key={ft.details._id}
           position={{ lat: parseFloat(ft.details.posLat), lng: parseFloat(ft.details.posLng)}}
           onClick={() => handleActiveMarker(ft.details._id)}
-          icon={logo32}
+          icon={logo64}
         >
           {activeMarker === ft.details._id ? (
             <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
