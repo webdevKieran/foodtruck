@@ -1,5 +1,5 @@
 // placeholder for login page
-import { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import DetailsForm from '../components/DetailsForm'
 import { useLogin } from '../hooks/useLogin'
 import { useAuthContext } from "../hooks/useAuthContext"
@@ -28,7 +28,7 @@ const Login = () => {
        <form className='login' onSubmit={handleSubmit} hidden={login}>
         <h3>Log in</h3>
         <div className='row mb-2'>
-        <label className='form-label'>Email:</label>
+        <label for='email' className='form-label'>Email:</label>
         <input
           type="email"
           onChange={(e) => setEmail(e.target.value)}
@@ -58,7 +58,7 @@ const Login = () => {
       </div>
       }
     </div>
-  <span className='attrib'> Photo by <a href="https://unsplash.com/@arturorey?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Arturo Rey</a> on <a href="https://unsplash.com/s/photos/food-truck?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  <span className='attrib' role='region' aria-label='Photo attribution'> Photo by <a href="https://unsplash.com/@arturorey?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Arturo Rey</a> on <a href="https://unsplash.com/s/photos/food-truck?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   </span> 
     </div>
   )

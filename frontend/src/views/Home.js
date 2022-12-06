@@ -1,3 +1,4 @@
+import React from 'react'
 import LoadMap from "../components/LoadMap"
 function Home() {
 

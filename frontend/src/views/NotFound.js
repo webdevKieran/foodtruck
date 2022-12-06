@@ -1,3 +1,4 @@
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 const NotFound = () => {
@@ -13,7 +14,7 @@ const NotFound = () => {
         But now that you are here, you have some options, like a site map:
         </p>
         <div className='container'><ol>
-          <li>Go to the map - whis is the main page.</li>
+          <li>Go to the map - which is the main page.</li>
           <br />
           <li>If you are logged in:
             <ul>

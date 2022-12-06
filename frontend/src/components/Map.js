@@ -1,4 +1,5 @@
-import { useState, useEffect, useMemo } from 'react';
+
+import React, { useState, useEffect, useMemo } from 'react';
 import { GoogleMap, MarkerF, InfoWindowF } from '@react-google-maps/api';
 import logo64 from '../img/logo64.png'
 
@@ -89,14 +90,15 @@ const mapOptions = useMemo(() => ({
 
   {foodtruck.map((ft) => (
   <MarkerF
-          key={ft.details._id}
-          position={{ lat: parseFloat(ft.details.posLat), lng: parseFloat(ft.details.posLng)}}
-          onClick={() => handleActiveMarker(ft.details._id)}
-          icon={logo64}
-        >
+        key={ft.details._id}
+        position={{ lat: parseFloat(ft.details.posLat), lng: parseFloat(ft.details.posLng)}}
+        onClick={() => handleActiveMarker(ft.details._id)}
+        icon={logo64}
+        aria-label="a food truck"
+      >
           {activeMarker === ft.details._id ? (
             <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
-              <div><h5>{ft.details.businessName}</h5>
+              <div aria-label='Foodtruck Business Details'><h5>{ft.details.businessName}</h5>
               <i>{ft.details.descrip}</i><br />
               Click to Call: 
               <a href={'tel:'+ft.details.contactNumber}>{ft.details.contactNumber}</a>

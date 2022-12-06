@@ -1,5 +1,6 @@
+
 // placeholder for signup page
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useSignup } from '../hooks/useSignup'
 import unsplash from '../img/unsplash.jpg'
 
@@ -48,7 +49,7 @@ return (
     </form>
    </div>
  </div>
- <span className='attrib'> Photo by <a href="https://unsplash.com/@arturorey?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Arturo Rey</a> on <a href="https://unsplash.com/s/photos/food-truck?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+ <span className='attrib' role='region' aria-label='Photo attribution'> Photo by <a href="https://unsplash.com/@arturorey?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Arturo Rey</a> on <a href="https://unsplash.com/s/photos/food-truck?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   </span> 
  </div>
   )
